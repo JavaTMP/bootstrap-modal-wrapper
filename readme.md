@@ -70,4 +70,4 @@ JavaTMP Bootstrap modal wrapper factory provides a confirmation dialog too with 
 ```
 
 ## Copyright and License
-Bootstrap-reverse is copyrighted by [JavaTMP](http://www.javatmp.com) and licensed under [MIT license](https://github.com/JavaTMP/bootstrap-modal-wrapper/blob/master/LICENSE).
+Bootstrap-modal-wrapper is copyrighted by [JavaTMP](http://www.javatmp.com) and licensed under [MIT license](https://github.com/JavaTMP/bootstrap-modal-wrapper/blob/master/LICENSE).
