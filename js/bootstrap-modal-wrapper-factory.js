@@ -1,3 +1,9 @@
+/*!
+ * bootstrap-modal-wrapper v1.0.0 (http://javatmp.com)
+ * Bootstrap modal factory that supports dynamic modal creations and stacked modal features.
+ * Copyright 2018 JavaTMP
+ * Licensed under MIT (https://github.com/JavaTMP/bootstrap-modal-wrapper/blob/master/LICENSE)
+ */
 
 (function (root, factory) {
 
