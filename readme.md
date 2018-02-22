@@ -1,4 +1,4 @@
-# bootstrap-reverse
+# Bootstrap Modal Wrapper
 Bootstrap modal factory that supports dynamic modal creations and stacked modal features.
 
 ## Installation Using NPM
@@ -13,6 +13,20 @@ cd bootstrap-modal-wrapper
 npm install
 gulp
 ```
-
+## Examples
+### BOOTSTRAP ALERT MODAL
+The simple scenario of modal wrapper is to show a simple alert when use press a button:
+```html
+<button id="simple-alert" type="button" class="btn btn-primary">
+    Basic Alert
+</button>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#simple-alert").on("click", function (event) {
+            BootstrapModalWrapperFactory.alert("Delfault alert <b>with only message Text</b>");
+        });
+    });
+</script>
+```
 ## Copyright and License
 Bootstrap-reverse is copyrighted by [JavaTMP](http://www.javatmp.com) and licensed under [MIT license](https://github.com/JavaTMP/bootstrap-modal-wrapper/blob/master/LICENSE).
