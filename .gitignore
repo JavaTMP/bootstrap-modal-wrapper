@@ -1,0 +1,7 @@
+# OS or Editor folders
+.DS_Store
+.idea
+npm-debug.log
+# Folders to ignore
+node_modules
+/nbproject/private/
