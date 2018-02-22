@@ -14,6 +14,22 @@ npm install
 gulp
 ```
 ## Examples
+
+### BOOTSTRAP Message MODAL
+The simplest scenario of modal wrapper is to show a simple message when use press a button:
+```html
+<button id="simple-message" type="button" class="btn btn-primary">
+    Basic Message
+</button>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#simple-message").on("click", function (event) {
+            BootstrapModalWrapperFactory.showMessage("Delfault Message to show to user");
+        });
+    });
+</script>
+```
+
 ### BOOTSTRAP ALERT MODAL
 The simple scenario of modal wrapper is to show a simple alert when use press a button:
 ```html
