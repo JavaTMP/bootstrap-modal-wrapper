@@ -28,5 +28,30 @@ The simple scenario of modal wrapper is to show a simple alert when use press a 
     });
 </script>
 ```
+
+### BOOTSTRAP CONFIRMATION MODAL
+JavaTMP Bootstrap modal wrapper factory provides a confirmation dialog too with ability to run different code. See the following example:
+```html
+<button id="simple-confirm" type="button" class="btn btn-primary">
+    Basic Confirm
+</button>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#simple-confirm").on("click", function (event) {
+            BootstrapModalWrapperFactory.confirm({
+                title: "Confirm",
+                message: "Are You Sure ?",
+                onConfirmAccept: function () {
+                    BootstrapModalWrapperFactory.alert("Thank you for ACCEPTING the previous confiramtion dialog");
+                },
+                onConfirmCancel: function () {
+                    BootstrapModalWrapperFactory.alert("Thank you for CANCELING the previous confiramtion dialog");
+                }
+            });
+        });
+    });
+</script>
+```
+
 ## Copyright and License
 Bootstrap-reverse is copyrighted by [JavaTMP](http://www.javatmp.com) and licensed under [MIT license](https://github.com/JavaTMP/bootstrap-modal-wrapper/blob/master/LICENSE).
