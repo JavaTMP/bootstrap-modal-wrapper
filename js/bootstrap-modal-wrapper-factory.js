@@ -6,7 +6,6 @@
  */
 
 (function (root, factory) {
-
     "use strict";
     // CommonJS module is defined
     if (typeof module !== "undefined" && module.exports) {
@@ -23,12 +22,9 @@
     }
 
 }(this, function ($) {
-
     "use strict";
 
-    var defaults = {
-        propertyName: "value"
-    };
+    var defaults = {};
 
 // The actual plugin constructor
     function ModalWrapperFactory(options) {
@@ -61,6 +57,7 @@
     var modalBodyContainer = "<div class='modal-body'></div>";
     var modalFooterContainer = "<div class='modal-footer d-flex flex-wrap'></div>";
     var modalButtonContainer = "<button id='' type='button' class='my-1'></button>";
+
     function uuid() {
         var uuid = "", i, random;
         for (i = 0; i < 32; i++) {
@@ -78,7 +75,7 @@
     function ModalWrapper(factory, options) {
         this.factory = factory;
         this.options = $.extend({}, {
-            id: getUniqueID("bootstrap-modal-wrapper"),
+            id: getUniqueID("b-m-w"),
             title: null,
             message: null,
             closable: false,
@@ -88,7 +85,7 @@
             onDestroy: null,
             buttons: []
         }, options);
-//        this.id = null;
+
         this.originalModal = null;
         this.isDestroy = false;
         this.isOpen = false;
@@ -97,12 +94,12 @@
     ModalWrapper.prototype.generateTemplate = function () {
 
         this.originalModal = $(modalTemplateContainer);
-        // add id
+
         this.originalModal.attr("id", this.options.id);
         if (this.options.size && (this.options.size === "modal-sm" || this.options.size === "modal-lg")) {
             this.originalModal.find(".modal-dialog").addClass(this.options.size);
         }
-// add header:
+
         if (this.options.title || this.options.closable) {
             this.originalModal.find(".modal-content").append(modalHeaderContainer);
         }
@@ -113,8 +110,6 @@
             this.originalModal.find(".modal-header").append(modalHeaderClosableContainer);
         }
 
-
-// add body
         if (this.options.message) {
             this.originalModal.find(".modal-content").append(modalBodyContainer);
             this.originalModal.find(".modal-body").html('').append(this.options.message);
@@ -134,13 +129,14 @@
             // YOU SHOULD STOP PROPAGATION because we register too for global modals.
             event.stopPropagation();
             var currentOpenDialog = 0;
-            for (var i = 0; i < $this.factory.globalModals.length; i++) {
-//                alert("check modal [" + $this.factory.globalModals[i].options.id + "]= " + $this.factory.globalModals[i].isOpen);
-                if ($this.factory.globalModals[i].isOpen && $this.factory.globalModals[i].originalModal.hasClass("show")) {
-                    currentOpenDialog++;
-                }
-            }
-//            currentOpenDialog = $(".modal:visible").length;
+
+//            for (var i = 0; i < $this.factory.globalModals.length; i++) {
+//                if ($this.factory.globalModals[i].isOpen && $this.factory.globalModals[i].originalModal.hasClass("show")) {
+//                    currentOpenDialog++;
+//                }
+//            }
+
+            currentOpenDialog = $(".modal.show").length;
 //            alert(currentOpenDialog);
             var zIndex = 100000 + (10 * currentOpenDialog);
             $(this).css("z-index", zIndex);
@@ -162,18 +158,8 @@
         }).on("hidden.bs.modal", function (event) {
             // YOU SHOULD STOP PROPAGATION because we register too for global modals.
             event.stopPropagation();
-            this.isOpen = false;
-            $(".modal:visible").length && $("body").addClass("modal-open");
             $this.destroy();
-        }).find(".modal-dialog").on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', function (event) {
-            // YOU SHOULD STOP PROPAGATION because we register too for global modals.
-            event.stopPropagation();
-            // https://stackoverflow.com/questions/9255279/callback-when-css3-transition-finishes
-            if ($(event.target).hasClass("modal-dialog")) {
-                setTimeout(function () {
-//                    alert($(e.target).attr("class"));
-                }, 0);
-            }
+            $(".modal.show").length && $("body").addClass("modal-open");
         });
     };
     ModalWrapper.prototype.destroy = function () {
@@ -196,12 +182,12 @@
                     break;
                 }
             }
-            $("#" + $this.options.id).find(".modal-dialog").off("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd");
             $("#" + $this.options.id).find(".modal-dialog").off();
             $("#" + $this.options.id).off();
             $("#" + $this.options.id).remove();
         });
     };
+
     ModalWrapper.prototype.show = function () {
         var currentOptions = {
             show: true,
@@ -209,9 +195,6 @@
             keyboard: this.options.closeByKeyboard,
             focus: true
         };
-//        alert(JSON.stringify(currentOptions));
-//        this.isOpen = true;
-        var that = this;
         this.originalModal.modal(currentOptions);
         return this;
     };
