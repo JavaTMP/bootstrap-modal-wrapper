@@ -15,7 +15,7 @@ gulp
 ```
 ## Examples
 
-### BOOTSTRAP Message MODAL
+### BOOTSTRAP MESSAGE MODAL
 The simplest scenario of modal wrapper is to show a simple message when use press a button:
 ```html
 <button id="simple-message" type="button" class="btn btn-primary">
