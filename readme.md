@@ -14,7 +14,8 @@ npm install
 gulp
 ```
 ## Demo And Examples
-Online demo of all below examples can find in the following JavaTMP demo page [Bootstrap Modal Online Demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/#pages/bootstrap/modal.html)
+Online demo of all below examples can find in the following JavaTMP demo page [Bootstrap Modal Online Demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/#pages/bootstrap/modal.html).
+
 ### BOOTSTRAP MESSAGE MODAL
 The simplest scenario of modal wrapper is to show a simple message when use press a button:
 ```html
