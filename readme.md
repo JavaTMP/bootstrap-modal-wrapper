@@ -268,6 +268,10 @@ setTimeout(function () {
     }, true);
 }, 3000);
 ```
-
+#### Advanced AJAX Bootstrap Modal Wrapper Contents
+You can simply adapt and use the bootstrap modal wrapper to provide a dynamic Bootstrap modal with remote AJAX contents,
+for example see [the navbar's message tab items in JavaTMP Home Page](http://demo.javatmp.com/JavaTMP-Static-Ajax/#pages/home.html).
+The following online documentation code provides you with the starting point to implement them https://www.javatmp.com/pages/javatmp-actionable-plugin.
+```
 ## Copyright and License
 Bootstrap-modal-wrapper is copyrighted by [JavaTMP](http://www.javatmp.com) and licensed under [MIT license](https://github.com/JavaTMP/bootstrap-modal-wrapper/blob/master/LICENSE).
