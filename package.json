@@ -1,6 +1,6 @@
 {
     "name": "bootstrap-modal-wrapper",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Bootstrap modal factory that supports dynamic modal creations and stacked modal features.",
     "keywords": ["bootstrap", "modal", "dialog", "bootstrap modal", "bootstrap dialog"],
     "author": "javatmp",
