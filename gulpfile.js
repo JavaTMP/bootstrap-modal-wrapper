@@ -33,7 +33,7 @@ gulp.task('dist', ["clean"], function (cb) {
                 "globals": ["jQuery", "$"]
             }))
             .pipe(eslint.format())
-            .pipe(uglify())
+            .pipe(uglify({output: {comments: /^!/}}))
             .pipe(rename({suffix: '.min'}))
             .pipe(gulp.dest('./dist/'));
 });
