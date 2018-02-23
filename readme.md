@@ -14,7 +14,7 @@ npm install
 gulp
 ```
 ## Demo And Examples
-Online demo of all below examples can find in the following JavaTMP demo page [Bootstrap Modal Online Demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/#pages/bootstrap/modal.html).
+Online demo of all below examples can be found in the following JavaTMP demo page [Bootstrap Modal Online Demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/#pages/bootstrap/modal.html).
 
 ### BOOTSTRAP MESSAGE MODAL
 The simplest scenario of modal wrapper is to show a simple message when use press a button:
@@ -68,6 +68,41 @@ JavaTMP Bootstrap modal wrapper factory provides a confirmation dialog too with 
         });
     });
 </script>
+```
+### JAVATMP BOOTSTRAP MODAL WRAPPER `CREATEMODAL` METHOD
+The JavaTMP Bootstrap Modal wrapper object provides a general method `createModal` which creates modals dynamically.
+the implementation of `BootstrapModalWrapperFactory.alert` and `BootstrapModalWrapperFactory.confirm` methods use `createModal`
+to provide desired behaviors.
+The following examples show you how to use `createModal` method in action:
+#### Create simple Bootstrap Modal wrapper instance dynamically
+```JS
+var onlyBody = BootstrapModalWrapperFactory.createModal({
+    message: "Simple Message body",
+    closable: false,
+    closeByBackdrop: true
+});
+onlyBody.show();
+```
+####
+```
+```
+####
+```
+```
+####
+```
+```
+####
+```
+```
+####
+```
+```
+####
+```
+```
+####
+```
 ```
 
 ## Copyright and License
