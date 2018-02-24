@@ -1,5 +1,5 @@
 # Bootstrap Modal Wrapper
-Bootstrap modal factory that supports dynamic modal creations and stacked modal features.
+Bootstrap modal factory that supports dynamic modal creations and nested stacked modal features.
 
 ## Installation Using NPM
 ```
