@@ -1,6 +1,6 @@
 /*!
  * bootstrap-modal-wrapper v1.0.0 (http://javatmp.com)
- * Bootstrap modal wrapper factory for creating dynamic and nested stacked dialog features.
+ * Bootstrap modal wrapper factory for creating dynamic and nested stacked dialog instances.
  * Copyright 2018 JavaTMP
  * Licensed under MIT (https://github.com/JavaTMP/bootstrap-modal-wrapper/blob/master/LICENSE)
  */
