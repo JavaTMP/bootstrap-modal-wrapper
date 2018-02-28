@@ -1,6 +1,6 @@
 {
     "name": "bootstrap-modal-wrapper",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Bootstrap modal wrapper factory for creating dynamic and nested stacked dialog instances.",
     "keywords": [
         "bootstrap",
@@ -20,7 +20,8 @@
         "gulp": "^3.9.1",
         "gulp-eslint": "^4.0.2",
         "gulp-rename": "^1.2.2",
-        "gulp-uglify": "^3.0.0"
+        "gulp-uglify": "^3.0.0",
+        "gulp-header": "^2.0.1"
     },
     "dependencies": {
         "jquery": "^3.3.1",
