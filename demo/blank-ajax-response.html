@@ -1,0 +1,37 @@
+<div class="dynamic-ajax-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="custom-element">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat. Ut wisis enim ad minim veniam, quis nostrud exerci tution ullam corper suscipit lobortis nisi ut aliquip ex ea commodo consequat. Duis te feugi facilisi. Duis autem dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit au gue duis dolore te feugat nulla facilisi.</p>
+            <p class="custom-element">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat. Ut wisis enim ad minim veniam, quis nostrud exerci tution ullam corper suscipit lobortis nisi ut aliquip ex ea commodo consequat. Duis te feugi facilisi. Duis autem dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit au gue duis dolore te feugat nulla facilisi.</p>
+            <p class="custom-element">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat. Ut wisis enim ad minim veniam, quis nostrud exerci tution ullam corper suscipit lobortis nisi ut aliquip ex ea commodo consequat. Duis te feugi facilisi. Duis autem dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit au gue duis dolore te feugat nulla facilisi.</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(function ($) {
+
+            // here we can reference the container bootstrap modal by its id
+            // passed as parameter to request by name "ajaxModalId"
+            // or for demo purposese ONLY we can get a reference top modal
+            // in current open managed instances in BootstrapModalWrapperFactory
+            var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
+            $("#" + currentParentModal.options.id).on(currentParentModal.options.ajaxContainerReadyEventName, function (event, modal) {
+                modal.updateSize("modal-lg");
+                modal.updateClosable(true);
+                modal.addButton({
+                    label: "Close",
+                    cssClass: "btn btn-primary",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        return modalWrapper.hide();
+                    }
+                });
+                modal.addButton({
+                    label: "Show Alert Dialog",
+                    cssClass: "btn btn-success",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        BootstrapModalWrapperFactory.alert("Alert Modal Created From within Ajax Content");
+                    }
+                });
+            });
+        });
+    </script>
+</div>

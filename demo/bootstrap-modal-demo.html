@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+    <head>
+        <title>Bootstrap Modal Wrapper Plugin Demo</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <h1 class="mt-3 text-primary">Bootstrap Modal Wrapper Plugin Demo</h1>
+                    <h2 class="mt-3 text-primary">Predefined Modal Types</h2>
+                    <button id="simple-message" type="button" class="btn btn-primary">
+                        Basic Message
+                    </button>
+                    <button id="simple-alert" type="button" class="btn btn-primary">
+                        Basic Alert
+                    </button>
+                    <button id="simple-confirm" type="button" class="btn btn-primary">
+                        Basic Confirm
+                    </button>
+                    <h2 class="mt-3 text-primary">Using Generic Modal Factory's createModal method</h2>
+                    <button id="onlyBody" type="button" class="btn btn-primary">
+                        Only Body
+                    </button>
+                    <button id="onlyBodyWithHeader" type="button" class="btn btn-primary">
+                        Body & Title
+                    </button>
+                    <button id="disableClose" type="button" class="btn btn-primary">
+                        Disable Close
+                    </button>
+                    <button id="disableCloseBackdrop" type="button" class="btn btn-primary">
+                        Disable Close & Backdrop
+                    </button>
+                    <button id="multiModal" type="button" class="btn btn-primary">
+                        Multi Modals
+                    </button>
+                    <h2 class="mt-3 text-primary">Update Contents on the fly</h2>
+                    <button id="updateTitleContent" type="button" class="btn btn-primary">
+                        Update Title and Content
+                    </button>
+                    <button id="updateModalSize" type="button" class="btn btn-primary">
+                        Update Modal Size
+                    </button>
+                    <button id="updateButtons" type="button" class="btn btn-primary">
+                        Update Buttons
+                    </button>
+                    <button id="ajaxContent" type="button" class="btn btn-primary">
+                        Fake Ajax Content Uploader
+                    </button>
+                    <h2 class="mt-3 text-primary">Bootstrap Ajax Content Modal</h2>
+                    <button id="ajaxContentModal" type="button" class="btn btn-primary">
+                        Remote Ajax Content Fetcher
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript Libraries -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="../dist/bootstrap-modal-wrapper-factory.min.js" type="text/javascript"></script>
+        <style type="text/css">
+
+        </style>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $("#simple-message").on("click", function (event) {
+                    BootstrapModalWrapperFactory.showMessage("Delfault Message to show to user");
+                });
+                $("#simple-alert").on("click", function (event) {
+                    BootstrapModalWrapperFactory.alert("Delfault alert <b>with only message</b>");
+                });
+                $("#simple-confirm").on("click", function (event) {
+                    BootstrapModalWrapperFactory.confirm({
+                        title: "Confirm",
+                        message: "Are You Sure ?",
+                        onConfirmAccept: function () {
+                            BootstrapModalWrapperFactory.alert("Thank you for ACCEPTING the previous confiramtion dialog");
+                        },
+                        onConfirmCancel: function () {
+                            BootstrapModalWrapperFactory.alert("Thank you for CANCELING the previous confiramtion dialog");
+                        }
+                    });
+                });
+                $("#onlyBody").on("click", function (event) {
+                    var onlyBody = BootstrapModalWrapperFactory.createModal({
+                        message: "Simple Message body",
+                        closable: false,
+                        closeByBackdrop: true
+                    });
+                    onlyBody.show();
+                });
+                $("#onlyBodyWithHeader").on("click", function (event) {
+                    var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                        message: "Simple Message body",
+                        title: "Header Title",
+                        closable: true,
+                        closeByBackdrop: true
+                    });
+                    modalWrapper.show();
+                });
+                $("#disableClose").on("click", function (event) {
+                    var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                        message: "Simple Message body",
+                        title: "Header Title",
+                        closable: false,
+                        closeByBackdrop: true
+                    });
+                    modalWrapper.show();
+                });
+                $("#disableCloseBackdrop").on("click", function (event) {
+                    var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                        message: "Simple Message body",
+                        title: "Header Title",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Close Me",
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            }
+                        ]
+                    });
+                    modalWrapper.show();
+                });
+                $("#multiModal").on("click", function (event) {
+                    var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                        message: "Simple Message body",
+                        title: "Header Title",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Close",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Create alert",
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    BootstrapModalWrapperFactory.alert("Alert Modal Created");
+                                }
+                            }
+                        ]
+                    }).show();
+                });
+                $("#updateTitleContent").on("click", function (event) {
+                    BootstrapModalWrapperFactory.createModal({
+                        message: "Simple Message body",
+                        title: "Header Title",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Close",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Update Title & Message",
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.updateTitle("New Title");
+                                    modalWrapper.updateMessage("Updated message content");
+                                }
+                            }
+                        ]
+                    }).show();
+                });
+                $("#updateModalSize").on("click", function (event) {
+                    BootstrapModalWrapperFactory.createModal({
+                        message: "Simple Message body",
+                        title: "Header Title",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Close",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Make Me Large",
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    modalWrapper.updateSize("modal-lg");
+                                }
+                            },
+                            {
+                                label: "Make Me Small",
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    modalWrapper.updateSize("modal-sm");
+                                }
+                            },
+                            {
+                                label: "Make Me Default",
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    modalWrapper.updateSize(null);
+                                }
+                            }
+                        ]
+                    }).show();
+                });
+                $("#updateButtons").on("click", function (event) {
+                    var buttonsCount = 0;
+                    BootstrapModalWrapperFactory.createModal({
+                        message: "Simple Message body",
+                        title: "Header Title",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Close",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Add Button",
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.addButton({
+                                        id: "id-" + (++buttonsCount),
+                                        label: "New " + buttonsCount,
+                                        cssClass: "btn btn-secondary",
+                                        action: function (modalWrapper, button, buttonData, originalEvent) {
+                                            BootstrapModalWrapperFactory.showMessage("nothing only to show attached event to button id [" + buttonData.id + "]");
+                                            return true;
+                                        }
+                                    });
+                                }
+                            },
+                            {
+                                label: "Delete Button",
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.removeButton("id-" + (buttonsCount--));
+                                }
+                            }
+                        ]
+                    }).show();
+                });
+                $("#ajaxContent").on("click", function (event) {
+                    var m = BootstrapModalWrapperFactory.createModal({
+                        message: '<div class="text-center">Loading</div>',
+                        closable: false,
+                        closeByBackdrop: false
+                    });
+                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
+                    m.show();
+                    setTimeout(function () {
+                        m.updateSize("modal-lg");
+                        m.updateTitle("Message Received");
+                        m.updateMessage("Message Content");
+                        m.addButton({
+                            label: "Close",
+                            cssClass: "btn btn-secondary",
+                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                                return modalWrapper.hide();
+                            }
+                        });
+                    }, 2000);
+                });
+                $("#ajaxContentModal").on("click", function (event) {
+                    var m = BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center">Loading</div>',
+                        closable: true,
+                        title: "AJAX Content",
+                        closeByBackdrop: false,
+                        url: "blank-ajax-response.html"
+                    });
+                });
+
+            });
+        </script>
+    </body>
+</html>
