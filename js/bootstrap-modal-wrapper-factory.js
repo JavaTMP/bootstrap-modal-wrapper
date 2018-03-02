@@ -295,7 +295,7 @@
             }
         });
         footerElement.append(button);
-        if (updateOptions === true) {
+        if (updateOptions !== false) {
             this.options.buttons.push(buttonData);
         }
 
