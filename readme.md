@@ -269,9 +269,56 @@ setTimeout(function () {
 }, 3000);
 ```
 #### Advanced AJAX Bootstrap Modal Wrapper Contents
-You can simply adapt and use the bootstrap modal wrapper to provide a dynamic Bootstrap modal with remote AJAX contents,
-for example see [the navbar's message tab items in JavaTMP Demo Home Page](http://demo.javatmp.com/JavaTMP-Static-Ajax/#pages/home.html).
-The following online documentation code provides you with the starting point to implement them https://www.javatmp.com/pages/javatmp-actionable-plugin.
+You can simply adapt and use the bootstrap modal wrapper to provide a dynamic Bootstrap modal with remote AJAX contents using `createAjaxModal` method,
+For example:
+```JS
+BootstrapModalWrapperFactory.createAjaxModal({
+    message: '<div class="text-center">Loading</div>',
+    closable: true,
+    title: "AJAX Content",
+    closeByBackdrop: false,
+    url: "blank-ajax-response.html"
+});
+```
+
+And the following are the response HTML code from the above URL:
+```HTML
+<div class="dynamic-ajax-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diem nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat. Ut wisis enim ad minim veniam, quis nostrud exerci tution ullam corper suscipit lobortis nisi ut aliquip ex ea commodo consequat. Duis te feugi facilisi. Duis autem dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit au gue duis dolore te feugat nulla facilisi.</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(function ($) {
+
+            // here we can reference the container bootstrap modal by its id
+            // passed as parameter to request by name "ajaxModalId"
+            // or for demo purposese ONLY we can get a reference top modal
+            // in current open managed instances in BootstrapModalWrapperFactory
+            var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
+            $("#" + currentParentModal.options.id).on(currentParentModal.options.ajaxContainerReadyEventName, function (event, modal) {
+                modal.updateSize("modal-lg");
+                modal.updateClosable(true);
+                modal.addButton({
+                    label: "Close",
+                    cssClass: "btn btn-primary",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        return modalWrapper.hide();
+                    }
+                });
+                modal.addButton({
+                    label: "Show Alert Dialog",
+                    cssClass: "btn btn-success",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        BootstrapModalWrapperFactory.alert("Alert Modal Created From within Ajax Content");
+                    }
+                });
+            });
+        });
+    </script>
+</div>
+```
 
 ## Copyright and License
 Bootstrap-modal-wrapper is copyrighted by [JavaTMP](http://www.javatmp.com) and licensed under [MIT license](https://github.com/JavaTMP/bootstrap-modal-wrapper/blob/master/LICENSE).
