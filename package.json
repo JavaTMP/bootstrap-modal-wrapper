@@ -1,6 +1,6 @@
 {
     "name": "bootstrap-modal-wrapper",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "Bootstrap modal wrapper factory for creating dynamic and nested stacked dialog instances.",
     "keywords": [
         "bootstrap",
