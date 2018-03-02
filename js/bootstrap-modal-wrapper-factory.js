@@ -34,6 +34,58 @@
         return newModalWrapper;
     };
 
+    ModalWrapperFactory.prototype.createAjaxModal = function (options) {
+        var $this = this;
+        var ajaxModalContainer = $this.createModal(options);
+        var settings = $.extend(ajaxModalContainer.options, {
+            url: null,
+            dataType: "html",
+            httpMethod: "GET",
+            passData: {},
+            ajaxContainerReadyEventName: "ajax-container-ready"
+        }, options);
+
+        ajaxModalContainer.originalModal.removeClass("fade");
+        ajaxModalContainer.originalModal.find(".modal-dialog").css({transition: 'all .3s'});
+
+        ajaxModalContainer.show();
+
+        settings.passData["ajaxModalId"] = ajaxModalContainer.options.id;
+
+        $.ajax({
+            type: settings.httpMethod,
+            dataType: settings.dataType,
+            url: settings.url,
+            data: settings.passData,
+            success: function (response, textStatus, jqXHR) {
+                // make sure the modal dialog is open before update
+                // its body with ajax response and triggering javaTmpAjaxContainerReady event.
+                var timeOut = 700;
+                var timer = null;
+                function runWhenDialogOpen() {
+//                    console.log("time out [" + Math.round(timeOut / 2) + "], isOpen [" + ajaxModalContainer.isOpen + "], is show [" + ajaxModalContainer.originalModal.hasClass("show") + "]");
+                    if (ajaxModalContainer.isOpen) {
+                        ajaxModalContainer.updateSize("modal-lg");
+                        var waiterTimer = setTimeout(function () {
+                            ajaxModalContainer.updateMessage(response);
+                            setTimeout(function () {
+                                $("#" + ajaxModalContainer.options.id).trigger(settings.ajaxContainerReadyEventName, [ajaxModalContainer]);
+                            }, 0);
+                        }, 350);
+                    } else {
+                        timeOut = timeOut <= 50 ? 50 : Math.round(timeOut / 2);
+                        clearTimeout(timer);
+                        timer = setTimeout(runWhenDialogOpen, timeOut);
+
+                    }
+                }
+                runWhenDialogOpen();
+            }
+        });
+
+        return ajaxModalContainer;
+    };
+
     var modalTemplateContainer =
             "<div class='modal fade' id='' tabindex='-1' role='dialog' aria-labelledby='' aria-hidden='true'>" +
             "    <div class='modal-dialog' role='document'>" +
