@@ -14,7 +14,7 @@
     "bugs": {
         "url": "https://github.com/JavaTMP/bootstrap-modal-wrapper/issues"
     },
-    "homepage": "http://demo.javatmp.com/JavaTMP-Static-Ajax/index.html#pages/bootstrap/modal.html",
+    "homepage": "https://github.com/JavaTMP/bootstrap-modal-wrapper",
     "devDependencies": {
         "del": "^3.0.0",
         "gulp": "^3.9.1",
