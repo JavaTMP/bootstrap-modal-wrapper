@@ -60,7 +60,7 @@
             success: function (response, textStatus, jqXHR) {
                 // make sure the modal dialog is open before update
                 // its body with ajax response and triggering javaTmpAjaxContainerReady event.
-                var timeOut = 700;
+                var timeOut = 500;
                 var timer = null;
                 function runWhenDialogOpen() {
 //                    console.log("time out [" + Math.round(timeOut / 2) + "], isOpen [" + ajaxModalContainer.isOpen + "], is show [" + ajaxModalContainer.originalModal.hasClass("show") + "]");
@@ -71,7 +71,7 @@
                             setTimeout(function () {
                                 $("#" + ajaxModalContainer.options.id).trigger(settings.ajaxContainerReadyEventName, [ajaxModalContainer]);
                             }, 0);
-                        }, 350);
+                        }, 300);
                     } else {
                         timeOut = timeOut <= 50 ? 50 : Math.round(timeOut / 2);
                         clearTimeout(timer);
