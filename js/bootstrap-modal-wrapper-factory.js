@@ -346,12 +346,11 @@
                 return buttonData.action.call(button, modalWrapper, button, buttonData, event);
             }
         });
-        footerElement.append(button);
         if (updateOptions !== false) {
             this.options.buttons.push(buttonData);
         }
 
-        return this;
+        return button.appendTo(footerElement);
     };
 
     ModalWrapper.prototype.setOnDestroy = function (onDestroyFunc) {
