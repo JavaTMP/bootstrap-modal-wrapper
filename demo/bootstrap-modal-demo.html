@@ -56,6 +56,10 @@
                     <button id="ajaxContentModal" type="button" class="btn btn-primary">
                         Remote Ajax Content Fetcher
                     </button>
+                    <h2 class="mt-3 text-primary">Original Bootstrap events</h2>
+                    <button id="logConsoleModal" type="button" class="btn btn-primary">
+                        Log Events On the console
+                    </button>
                 </div>
             </div>
         </div>
@@ -292,6 +296,30 @@
                         closeByBackdrop: false,
                         url: "blank-ajax-response.html"
                     });
+                });
+
+                $("#logConsoleModal").on("click", function (event) {
+                    var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                        message: "Simple Message body",
+                        title: "Header Title",
+                        closable: true,
+                        closeByBackdrop: true
+                    });
+                    modalWrapper.originalModal.find(".modal-header").addClass("bg-primary text-white");
+                    modalWrapper.originalModal.on('show.bs.modal', function (e) {
+                        // do something...
+                        console.log('show.bs.modal');
+                    }).on('shown.bs.modal', function (e) {
+                        // do something...
+                        console.log('shown.bs.modal');
+                    }).on('hide.bs.modal', function (e) {
+                        // do something...
+                        console.log('hide.bs.modal');
+                    }).on('hidden.bs.modal', function (e) {
+                        // do something...
+                        console.log('hidden.bs.modal');
+                    });
+                    modalWrapper.show();
                 });
 
             });
