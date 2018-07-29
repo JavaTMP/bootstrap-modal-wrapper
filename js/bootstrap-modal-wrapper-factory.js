@@ -128,7 +128,8 @@
             closeByKeyboard: true,
             size: null,
             onDestroy: null,
-            buttons: []
+            buttons: [],
+            headerClass : null
         }, options);
 
         this.originalModal = null;
@@ -153,6 +154,10 @@
         }
         if (this.options.closable) {
             this.originalModal.find(".modal-header").append(modalHeaderClosableContainer);
+        }
+
+        if(this.options.headerClass) {
+            this.originalModal.find(".modal-header").addClass(this.options.headerClass);
         }
 
         if (this.options.message) {
