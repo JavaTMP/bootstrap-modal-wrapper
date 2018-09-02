@@ -300,10 +300,10 @@ And the following are the response HTML code from the above URL:
             var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
             $("#" + currentParentModal.options.id).on(currentParentModal.options.ajaxContainerReadyEventName, function (event, modal) {
                 modal.addButton({
-                    label: "Make it closable by backdrop click",
+                    label: "Update closable by backdrop click",
                     cssClass: "btn btn-info",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
-                        modalWrapper.updateClosable(true);
+                        modalWrapper.updateClosableByBackdrop(true);
                     }
                 });
                 modal.addButton({
