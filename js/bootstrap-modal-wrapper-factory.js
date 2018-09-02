@@ -42,6 +42,8 @@
             dataType: "html",
             httpMethod: "GET",
             passData: {},
+            sendId: true,
+            idParameter: "ajaxModalId",
             ajaxContainerReadyEventName: "ajax-container-ready"
         }, options);
 
@@ -50,7 +52,9 @@
 
         ajaxModalContainer.show();
 
-        settings.passData["ajaxModalId"] = ajaxModalContainer.options.id;
+        if (settings.sendId) {
+            settings.passData[settings.idParameter] = ajaxModalContainer.options.id;
+        }
 
         $.ajax({
             type: settings.httpMethod,
@@ -60,7 +64,7 @@
             success: function (response, textStatus, jqXHR) {
                 // make sure the modal dialog is open before update
                 // its body with ajax response and triggering javaTmpAjaxContainerReady event.
-                var timeOut = 500;
+                var timeOut = 200;
                 var timer = null;
                 function runWhenDialogOpen() {
 //                    console.log("time out [" + Math.round(timeOut / 2) + "], isOpen [" + ajaxModalContainer.isOpen + "], is show [" + ajaxModalContainer.originalModal.hasClass("show") + "]");
@@ -129,8 +133,11 @@
             size: null,
             onDestroy: null,
             buttons: [],
-            headerClass : null
+            headerClass: null,
+            localData: {}
         }, options);
+
+        $.extend(true, this.options.localData, options.localData);
 
         this.originalModal = null;
         this.isDestroy = false;
@@ -156,7 +163,7 @@
             this.originalModal.find(".modal-header").append(modalHeaderClosableContainer);
         }
 
-        if(this.options.headerClass) {
+        if (this.options.headerClass) {
             this.originalModal.find(".modal-header").addClass(this.options.headerClass);
         }
 

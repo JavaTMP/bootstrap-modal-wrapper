@@ -294,7 +294,17 @@
                         closable: true,
                         title: "AJAX Content",
                         closeByBackdrop: false,
-                        url: "blank-ajax-response.html"
+                        sendId: true, // default is true which send the modal id as a url parameter.
+                        idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
+                        url: "blank-ajax-response.html",
+                        localData: {
+                            para1: "any value 1",
+                            object1: {m: 1, n: 3},
+                            array1: [1, 2, 3, 4, 5],
+                            funRef: function () {
+                                alert("running from the modal itself");
+                            }
+                        } // Javascript Object kept in the settings object and available from within modal functions by options.localData
                     });
                 });
 
