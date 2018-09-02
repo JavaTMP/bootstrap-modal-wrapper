@@ -53,9 +53,19 @@
                         Fake Ajax Content Uploader
                     </button>
                     <h2 class="mt-3 text-primary">Bootstrap Ajax Content Modal</h2>
-                    <button id="ajaxContentModal" type="button" class="btn btn-primary">
-                        Remote Ajax Content Fetcher
+                    <button id="ajaxContentinSmallModal" type="button" class="btn btn-primary m-3">
+                        Remote Ajax Content Fetcher in Small Modal
                     </button>
+                    <button id="ajaxContentinDefaultModal" type="button" class="btn btn-primary m-3">
+                        Remote Ajax Content Fetcher in Default Modal
+                    </button>
+                    <button id="ajaxContentinLargeModal" type="button" class="btn btn-primary m-3">
+                        Remote Ajax Content Fetcher in Large Modal
+                    </button>
+                    <button id="ajaxContentinSmallToLargeModal" type="button" class="btn btn-primary m-3">
+                        Remote Ajax Content Fetcher in Small then large Modal
+                    </button>
+
                     <h2 class="mt-3 text-primary">Original Bootstrap events</h2>
                     <button id="logConsoleModal" type="button" class="btn btn-primary">
                         Log Events On the console
@@ -288,7 +298,7 @@
                         });
                     }, 2000);
                 });
-                $("#ajaxContentModal").on("click", function (event) {
+                $("#ajaxContentinSmallToLargeModal").on("click", function (event) {
                     var m = BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center">Loading</div>',
                         closable: true,
@@ -296,6 +306,8 @@
                         closeByBackdrop: false,
                         sendId: true, // default is true which send the modal id as a url parameter.
                         idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
+                        updateSizeAfterDataFetchTo: "modal-lg", // default is "modal-lg" or null for standard or "modal-sm"
+                        size: "modal-sm",
                         url: "blank-ajax-response.html",
                         localData: {
                             para1: "any value 1",
@@ -307,6 +319,71 @@
                         } // Javascript Object kept in the settings object and available from within modal functions by options.localData
                     });
                 });
+                $("#ajaxContentinSmallModal").on("click", function (event) {
+                    var m = BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center">Loading</div>',
+                        closable: true,
+                        title: "AJAX Content",
+                        closeByBackdrop: false,
+                        sendId: true, // default is true which send the modal id as a url parameter.
+                        idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
+                        updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
+                        size: "modal-sm",
+                        url: "blank-ajax-response.html",
+                        localData: {
+                            para1: "any value 1",
+                            object1: {m: 1, n: 3},
+                            array1: [1, 2, 3, 4, 5],
+                            funRef: function () {
+                                alert("running from the modal itself");
+                            }
+                        } // Javascript Object kept in the settings object and available from within modal functions by options.localData
+                    });
+                });
+                $("#ajaxContentinDefaultModal").on("click", function (event) {
+                    var m = BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center">Loading</div>',
+                        closable: true,
+                        title: "AJAX Content",
+                        closeByBackdrop: false,
+                        sendId: true, // default is true which send the modal id as a url parameter.
+                        idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
+                        updateSizeAfterDataFetchTo: null, // default is "modal-lg" or null for standard or "modal-sm"
+                        size: null,
+                        url: "blank-ajax-response.html",
+                        localData: {
+                            para1: "any value 1",
+                            object1: {m: 1, n: 3},
+                            array1: [1, 2, 3, 4, 5],
+                            funRef: function () {
+                                alert("running from the modal itself");
+                            }
+                        } // Javascript Object kept in the settings object and available from within modal functions by options.localData
+                    });
+                });
+                $("#ajaxContentinLargeModal").on("click", function (event) {
+                    var m = BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center">Loading</div>',
+                        closable: true,
+                        title: "AJAX Content",
+                        closeByBackdrop: false,
+                        sendId: true, // default is true which send the modal id as a url parameter.
+                        idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
+                        updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
+                        size: "modal-lg",
+                        url: "blank-ajax-response.html",
+                        localData: {
+                            para1: "any value 1",
+                            object1: {m: 1, n: 3},
+                            array1: [1, 2, 3, 4, 5],
+                            funRef: function () {
+                                alert("running from the modal itself");
+                            }
+                        } // Javascript Object kept in the settings object and available from within modal functions by options.localData
+                    });
+                });
+
+
 
                 $("#logConsoleModal").on("click", function (event) {
                     var modalWrapper = BootstrapModalWrapperFactory.createModal({

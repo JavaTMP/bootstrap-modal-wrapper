@@ -293,15 +293,40 @@ And the following are the response HTML code from the above URL:
     </div>
     <script type="text/javascript">
         jQuery(function ($) {
-
             // here we can reference the container bootstrap modal by its id
             // passed as parameter to request by name "ajaxModalId"
             // or for demo purposese ONLY we can get a reference top modal
             // in current open managed instances in BootstrapModalWrapperFactory
             var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
             $("#" + currentParentModal.options.id).on(currentParentModal.options.ajaxContainerReadyEventName, function (event, modal) {
-                modal.updateSize("modal-lg");
-                modal.updateClosable(true);
+                modal.addButton({
+                    label: "Make it closable by backdrop click",
+                    cssClass: "btn btn-info",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        modalWrapper.updateClosable(true);
+                    }
+                });
+                modal.addButton({
+                    label: "Show Ajax Parameters",
+                    cssClass: "btn btn-info",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        alert("modal.options.url [" + modal.options.url + "]");
+                    }
+                });
+                modal.addButton({
+                    label: "Show localData Object",
+                    cssClass: "btn btn-info",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        alert("You can Use the following data came from initiator sender code : " + JSON.stringify(modal.options.localData));
+                    }
+                });
+                modal.addButton({
+                    label: "Run Function from Sender",
+                    cssClass: "btn btn-info",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        modal.options.localData.funRef();
+                    }
+                });
                 modal.addButton({
                     label: "Close",
                     cssClass: "btn btn-primary",

@@ -37,13 +37,14 @@
     ModalWrapperFactory.prototype.createAjaxModal = function (options) {
         var $this = this;
         var ajaxModalContainer = $this.createModal(options);
-        var settings = $.extend(ajaxModalContainer.options, {
+        var settings = $.extend(true, ajaxModalContainer.options, {
             url: null,
             dataType: "html",
             httpMethod: "GET",
             passData: {},
             sendId: true,
             idParameter: "ajaxModalId",
+            updateSizeAfterDataFetchTo: "modal-lg",
             ajaxContainerReadyEventName: "ajax-container-ready"
         }, options);
 
@@ -69,7 +70,7 @@
                 function runWhenDialogOpen() {
 //                    console.log("time out [" + Math.round(timeOut / 2) + "], isOpen [" + ajaxModalContainer.isOpen + "], is show [" + ajaxModalContainer.originalModal.hasClass("show") + "]");
                     if (ajaxModalContainer.isOpen) {
-                        ajaxModalContainer.updateSize("modal-lg");
+                        ajaxModalContainer.updateSize(settings.updateSizeAfterDataFetchTo);
                         var waiterTimer = setTimeout(function () {
                             ajaxModalContainer.updateMessage(response);
                             setTimeout(function () {
