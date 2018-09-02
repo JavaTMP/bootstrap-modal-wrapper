@@ -303,6 +303,14 @@
         }
         return this;
     };
+    ModalWrapper.prototype.updateClosableByBackdrop = function (newClosableByBackdropValue) {
+        if (this.options.closeByBackdrop !== newClosableByBackdropValue) {
+            this.options.closeByBackdrop = newClosableByBackdropValue;
+            $("#" + this.options.id).data('bs.modal')._config.backdrop = this.options.closeByBackdrop ? true : "static";
+            this.originalModal.modal("handleUpdate");
+        }
+        return this;
+    };
     ModalWrapper.prototype.removeHeader = function () {
         var headerElement = this.originalModal.find(".modal-header");
         if (headerElement.length > 0) {
