@@ -49,7 +49,8 @@ The simple scenario of modal wrapper is to show a simple alert when use press a 
 ```
 
 ### BOOTSTRAP CONFIRMATION MODAL
-JavaTMP Bootstrap modal wrapper factory provides a confirmation dialog too with ability to run different code. See the following example:
+JavaTMP Bootstrap modal wrapper factory provides a confirmation dialog too with ability to run different code.
+See the following example:
 ```html
 <button id="simple-confirm" type="button" class="btn btn-primary">
     Basic Confirm
