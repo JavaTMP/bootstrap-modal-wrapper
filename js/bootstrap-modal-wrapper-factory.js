@@ -47,46 +47,32 @@
             updateSizeAfterDataFetchTo: "modal-lg",
             ajaxContainerReadyEventName: "ajax-container-ready"
         }, options);
-
-        ajaxModalContainer.originalModal.removeClass("fade");
-        ajaxModalContainer.originalModal.find(".modal-dialog").css({transition: 'all .3s'});
-
-        ajaxModalContainer.show();
-
         if (settings.sendId) {
             settings.passData[settings.idParameter] = ajaxModalContainer.options.id;
         }
 
-        $.ajax({
-            type: settings.httpMethod,
-            dataType: settings.dataType,
-            url: settings.url,
-            data: settings.passData,
-            success: function (response, textStatus, jqXHR) {
-                // make sure the modal dialog is open before update
-                // its body with ajax response and triggering javaTmpAjaxContainerReady event.
-                var timeOut = 200;
-                var timer = null;
-                function runWhenDialogOpen() {
-//                    console.log("time out [" + Math.round(timeOut / 2) + "], isOpen [" + ajaxModalContainer.isOpen + "], is show [" + ajaxModalContainer.originalModal.hasClass("show") + "]");
-                    if (ajaxModalContainer.isOpen) {
-                        ajaxModalContainer.updateSize(settings.updateSizeAfterDataFetchTo);
-                        var waiterTimer = setTimeout(function () {
-                            ajaxModalContainer.updateMessage(response);
-                            setTimeout(function () {
-                                $("#" + ajaxModalContainer.options.id).trigger(settings.ajaxContainerReadyEventName, [ajaxModalContainer]);
-                            }, 0);
-                        }, 300);
-                    } else {
-                        timeOut = timeOut <= 50 ? 50 : Math.round(timeOut / 2);
-                        clearTimeout(timer);
-                        timer = setTimeout(runWhenDialogOpen, timeOut);
+        ajaxModalContainer.originalModal.removeClass("fade");
+        ajaxModalContainer.originalModal.find(".modal-dialog").css({transition: 'all .3s'});
+        ajaxModalContainer.originalModal.find(".modal-body").css({"max-height": "65vh", "overflow-y": "auto", "overflow-x": "hidden"});
+        ajaxModalContainer.originalModal.css({"overflow": "hidden"});
 
-                    }
+        // make sure the dialog is shown before calling AJAX request
+        ajaxModalContainer.originalModal.one('shown.bs.modal', function (e) {
+            $.ajax({
+                type: settings.httpMethod,
+                dataType: settings.dataType,
+                url: settings.url,
+                data: settings.passData,
+                success: function (response, textStatus, jqXHR) {
+                    ajaxModalContainer.updateSize(settings.updateSizeAfterDataFetchTo);
+                    ajaxModalContainer.updateMessage(response);
+                    setTimeout(function () {
+                        $("#" + ajaxModalContainer.options.id).trigger(settings.ajaxContainerReadyEventName, [ajaxModalContainer]);
+                    }, 0);
                 }
-                runWhenDialogOpen();
-            }
+            });
         });
+        ajaxModalContainer.show();
 
         return ajaxModalContainer;
     };
