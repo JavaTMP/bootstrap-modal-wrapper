@@ -141,7 +141,7 @@
         if (this.options.size && (this.options.size === "modal-sm" || this.options.size === "modal-lg")) {
             $dialog.addClass(this.options.size);
         }
-        if (this.options.centered && this.options.centered === true) {
+        if (this.options.centered === true) {
             $dialog.addClass('modal-dialog-centered');
         }
 
