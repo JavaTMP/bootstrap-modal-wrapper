@@ -245,6 +245,13 @@
     ModalWrapper.prototype.hide = function () {
         this.originalModal.modal("hide");
     };
+    
+    ModalWrapper.prototype.hideAll = function () {
+        $('.modal').each(function (i, o) {
+            var $obj = $(o);
+            $obj.modal("hide");
+        })
+    };    
 
     ModalWrapper.prototype.updateTitle = function (newTitle) {
         this.options.title = newTitle;
