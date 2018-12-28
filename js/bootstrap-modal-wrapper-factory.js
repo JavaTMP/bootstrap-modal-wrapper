@@ -121,7 +121,8 @@
             onDestroy: null,
             buttons: [],
             headerClass: null,
-            localData: {}
+            localData: {},
+            centered: false
         }, options);
 
         $.extend(true, this.options.localData, options.localData);
@@ -136,8 +137,12 @@
         this.originalModal = $(modalTemplateContainer);
 
         this.originalModal.attr("id", this.options.id);
+        var $dialog = this.originalModal.find(".modal-dialog");
         if (this.options.size && (this.options.size === "modal-sm" || this.options.size === "modal-lg")) {
-            this.originalModal.find(".modal-dialog").addClass(this.options.size);
+            $dialog.addClass(this.options.size);
+        }
+        if (this.options.centered === true) {
+            $dialog.addClass('modal-dialog-centered');
         }
 
         if (this.options.title || this.options.closable) {
