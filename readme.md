@@ -1,6 +1,8 @@
 # Bootstrap Modal Wrapper
 Bootstrap modal wrapper factory for creating dynamic and nested stacked dialog instances.
 
+[![](https://data.jsdelivr.com/v1/package/npm/bootstrap-modal-wrapper/badge)](https://www.jsdelivr.com/package/npm/bootstrap-modal-wrapper)
+
 ## Installation Using NPM
 ```
 npm install bootstrap-modal-wrapper
