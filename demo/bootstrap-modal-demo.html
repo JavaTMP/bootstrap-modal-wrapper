@@ -70,6 +70,10 @@
                     <button id="logConsoleModal" type="button" class="btn btn-primary">
                         Log Events On the console
                     </button>
+                    <h2 class="mt-3 text-primary">Centered Bootstrap Modals</h2>
+                    <button id="centeredBootModal" type="button" class="btn btn-primary">
+                        Centered Bootstrap Modal
+                    </button>
                 </div>
             </div>
         </div>
@@ -382,9 +386,6 @@
                         } // Javascript Object kept in the settings object and available from within modal functions by options.localData
                     });
                 });
-
-
-
                 $("#logConsoleModal").on("click", function (event) {
                     var modalWrapper = BootstrapModalWrapperFactory.createModal({
                         message: "Simple Message body",
@@ -408,7 +409,15 @@
                     });
                     modalWrapper.show();
                 });
-
+                $("#centeredBootModal").on("click", function (event) {
+                    var centeredBootModal = BootstrapModalWrapperFactory.createModal({
+                        message: "Simple Centered Bootstrap Message body",
+                        closable: false,
+                        closeByBackdrop: true,
+                        centered: true
+                    });
+                    centeredBootModal.show();
+                });
             });
         </script>
     </body>
