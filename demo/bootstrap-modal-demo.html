@@ -42,6 +42,9 @@
                     <button id="longBodyContent" type="button" class="btn btn-primary">
                         Long Body Content
                     </button>
+                    <button id="h1ForTitle" type="button" class="btn btn-primary">
+                        H1 for title
+                    </button>
                     <h2 class="mt-3 text-primary">Update Contents on the fly</h2>
                     <button id="updateTitleContent" type="button" class="btn btn-primary">
                         Update Title and Content
@@ -435,7 +438,7 @@
                     for (var i = 0; i < 20; i++) {
                         longContent += "<p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>";
                     }
-                    var centeredBootModal = BootstrapModalWrapperFactory.createModal({
+                    var dialog = BootstrapModalWrapperFactory.createModal({
                         title: "Long Body Content",
                         message: longContent,
                         closable: false,
@@ -465,9 +468,29 @@
                             }
                         ]
                     });
-                    centeredBootModal.show();
+                    dialog.show();
                 });
 
+                $("#h1ForTitle").on("click", function (event) {
+                    var dialog = BootstrapModalWrapperFactory.createModal({
+                        title: "Long Body Content",
+                        modalTitleContainer: "<h1 class='modal-title'></h1>",
+                        message: "modal dialog body content",
+                        closable: true,
+                        closeByBackdrop: true,
+                        centered: true,
+                        buttons: [
+                            {
+                                label: "Close",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            }
+                        ]
+                    });
+                    dialog.show();
+                });
             });
         </script>
     </body>

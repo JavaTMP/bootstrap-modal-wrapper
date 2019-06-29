@@ -85,7 +85,6 @@
             "</div>" +
             "</div>";
     var modalHeaderContainer = "<div class='modal-header'></div>";
-    var modalTitleContainer = "<h5 class='modal-title'></h5>";
     var modalHeaderClosableContainer =
             "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
             "<span aria-hidden='true'>&times;</span>" +
@@ -123,7 +122,8 @@
             headerClass: null,
             localData: {},
             centered: false,
-            modalDialogScrollable: true
+            modalDialogScrollable: true,
+            modalTitleContainer: "<h5 class='modal-title'></h5>"
         }, options);
 
         $.extend(true, this.options.localData, options.localData);
@@ -153,7 +153,7 @@
             this.originalModal.find(".modal-content").append(modalHeaderContainer);
         }
         if (this.options.title) {
-            this.originalModal.find(".modal-header").append(modalTitleContainer).find(".modal-title").append(this.options.title);
+            this.originalModal.find(".modal-header").append(this.options.modalTitleContainer).find(".modal-title").append(this.options.title);
         }
         if (this.options.closable) {
             this.originalModal.find(".modal-header").append(modalHeaderClosableContainer);
@@ -264,7 +264,7 @@
                 this.originalModal.find(".modal-content").prepend(modalHeaderContainer);
                 headerElement = this.originalModal.find(".modal-header");
             }
-            headerElement.prepend(modalTitleContainer);
+            headerElement.prepend(this.options.modalTitleContainer);
             titleElement = this.originalModal.find(".modal-title");
         }
         titleElement.html(newTitle);
