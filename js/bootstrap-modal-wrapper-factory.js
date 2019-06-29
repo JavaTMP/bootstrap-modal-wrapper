@@ -79,17 +79,17 @@
 
     var modalTemplateContainer =
             "<div class='modal fade' id='' tabindex='-1' role='dialog' aria-labelledby='' aria-hidden='true'>" +
-            "    <div class='modal-dialog' role='document'>" +
-            "        <div class='modal-content'>" +
-            "        </div>" +
-            "    </div>" +
+            "<div class='modal-dialog' role='document'>" +
+            "<div class='modal-content'>" +
+            "</div>" +
+            "</div>" +
             "</div>";
     var modalHeaderContainer = "<div class='modal-header'></div>";
     var modalTitleContainer = "<h5 class='modal-title'></h5>";
     var modalHeaderClosableContainer =
-            "                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-            "                    <span aria-hidden='true'>&times;</span>" +
-            "                </button>";
+            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+            "<span aria-hidden='true'>&times;</span>" +
+            "</button>";
     var modalBodyContainer = "<div class='modal-body'></div>";
     var modalFooterContainer = "<div class='modal-footer d-flex flex-wrap'></div>";
     var modalButtonContainer = "<button id='' type='button' class='my-1'></button>";
