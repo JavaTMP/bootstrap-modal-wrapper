@@ -53,8 +53,8 @@
 
         ajaxModalContainer.originalModal.removeClass("fade");
         ajaxModalContainer.originalModal.find(".modal-dialog").css({transition: 'all .3s'});
-        ajaxModalContainer.originalModal.find(".modal-body").css({"max-height": "65vh", "overflow-y": "auto", "overflow-x": "hidden"});
-        ajaxModalContainer.originalModal.css({"overflow": "hidden"});
+//        ajaxModalContainer.originalModal.find(".modal-body").css({"max-height": "65vh", "overflow-y": "auto", "overflow-x": "hidden"});
+//        ajaxModalContainer.originalModal.css({"overflow": "hidden"});
 
         // make sure the dialog is shown before calling AJAX request
         ajaxModalContainer.originalModal.one('shown.bs.modal', function (e) {
@@ -122,7 +122,8 @@
             buttons: [],
             headerClass: null,
             localData: {},
-            centered: false
+            centered: false,
+            modalDialogScrollable: true
         }, options);
 
         $.extend(true, this.options.localData, options.localData);
@@ -143,6 +144,9 @@
         }
         if (this.options.centered === true) {
             $dialog.addClass('modal-dialog-centered');
+        }
+        if (this.options.modalDialogScrollable === true) {
+            $dialog.addClass('modal-dialog-scrollable');
         }
 
         if (this.options.title || this.options.closable) {
@@ -332,6 +336,19 @@
             } else if (this.options.size === "modal-sm" || this.options.size === "modal-lg" || this.options.size === "modal-xl") {
                 this.originalModal.find(".modal-dialog").removeClass("modal-xl modal-lg modal-sm");
                 this.originalModal.find(".modal-dialog").addClass(this.options.size);
+            }
+            this.originalModal.modal("handleUpdate");
+        }
+        return this;
+    };
+    ModalWrapper.prototype.updateModalDialogScrollable = function (modalDialogScrollable) {
+        if (this.options.modalDialogScrollable !== modalDialogScrollable) {
+            this.options.modalDialogScrollable = modalDialogScrollable;
+            var modalDialog = this.originalModal.find(".modal-dialog");
+            if (this.options.modalDialogScrollable === true) {
+                modalDialog.addClass("modal-dialog-scrollable");
+            } else if (this.options.modalDialogScrollable === false) {
+                modalDialog.removeClass("modal-dialog-scrollable");
             }
             this.originalModal.modal("handleUpdate");
         }
