@@ -328,9 +328,9 @@
         if (this.options.size !== newSize) {
             this.options.size = newSize;
             if (!this.options.size || (typeof this.options.size === "undefined") || this.options.size === null) {
-                this.originalModal.find(".modal-dialog").removeClass("modal-lg modal-sm");
-            } else if (this.options.size === "modal-sm" || this.options.size === "modal-lg") {
-                this.originalModal.find(".modal-dialog").removeClass("modal-lg modal-sm");
+                this.originalModal.find(".modal-dialog").removeClass("modal-xl modal-lg modal-sm");
+            } else if (this.options.size === "modal-sm" || this.options.size === "modal-lg" || this.options.size === "modal-xl") {
+                this.originalModal.find(".modal-dialog").removeClass("modal-xl modal-lg modal-sm");
                 this.originalModal.find(".modal-dialog").addClass(this.options.size);
             }
             this.originalModal.modal("handleUpdate");
