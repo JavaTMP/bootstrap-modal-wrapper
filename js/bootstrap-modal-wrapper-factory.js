@@ -139,7 +139,7 @@
 
         this.originalModal.attr("id", this.options.id);
         var $dialog = this.originalModal.find(".modal-dialog");
-        if (this.options.size && (this.options.size === "modal-sm" || this.options.size === "modal-lg")) {
+        if (this.options.size && (this.options.size === "modal-sm" || this.options.size === "modal-lg" || this.options.size === "modal-xl")) {
             $dialog.addClass(this.options.size);
         }
         if (this.options.centered === true) {
