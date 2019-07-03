@@ -71,8 +71,8 @@
                     <button id="ajaxContentinXLargeModal" type="button" class="btn btn-primary m-3">
                         Remote Ajax Content Fetcher in X Large Modal
                     </button>
-                    <button id="ajaxContentinSmallToLargeModal" type="button" class="btn btn-primary m-3">
-                        Remote Ajax Content Fetcher in Small then large Modal
+                    <button id="ajaxContentinSmallToXLargeModal" type="button" class="btn btn-primary m-3">
+                        Remote Ajax Content Fetcher in Small then X large Modal
                     </button>
 
                     <h2 class="mt-3 text-primary">Original Bootstrap events</h2>
@@ -319,7 +319,7 @@
                         });
                     }, 2000);
                 });
-                $("#ajaxContentinSmallToLargeModal").on("click", function (event) {
+                $("#ajaxContentinSmallToXLargeModal").on("click", function (event) {
                     var m = BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center">Loading</div>',
                         closable: true,
@@ -327,7 +327,7 @@
                         closeByBackdrop: false,
                         sendId: true, // default is true which send the modal id as a url parameter.
                         idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
-                        updateSizeAfterDataFetchTo: "modal-lg", // default is "modal-lg" or null for standard or "modal-sm"
+                        updateSizeAfterDataFetchTo: "modal-xl", // default is "modal-lg" or null for standard or "modal-sm"
                         size: "modal-sm",
                         url: "blank-ajax-response.html",
                         localData: {
