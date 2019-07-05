@@ -21,42 +21,42 @@
                 modal.addButton({
                     label: "Update closable by backdrop click",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        modalWrapper.updateClosableByBackdrop(true);
+                    action: function (button, buttonData, originalEvent) {
+                        this.updateClosableByBackdrop(true);
                     }
                 });
                 modal.addButton({
                     label: "Show Ajax Parameters",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        alert("modal.options.url [" + modal.options.url + "]");
+                    action: function (button, buttonData, originalEvent) {
+                        alert("modal.options.ajax is [" + JSON.stringify(this.options.ajax) + "]");
                     }
                 });
                 modal.addButton({
                     label: "Show localData Object",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        alert("You can Use the following data came from initiator sender code : " + JSON.stringify(modal.options.localData));
+                    action: function (button, buttonData, originalEvent) {
+                        alert("You can Use the following data came from initiator sender code : " + JSON.stringify(this.options.localData));
                     }
                 });
                 modal.addButton({
                     label: "Run Function from Sender",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        modal.options.localData.funRef();
+                    action: function (button, buttonData, originalEvent) {
+                        this.options.localData.funRef();
                     }
                 });
                 modal.addButton({
                     label: "Close",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        return modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
                     }
                 });
                 modal.addButton({
                     label: "Show Alert Dialog",
                     cssClass: "btn btn-success",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         BootstrapModalWrapperFactory.alert("Alert Modal Created From within Ajax Content");
                     }
                 });

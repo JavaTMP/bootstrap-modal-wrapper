@@ -194,8 +194,8 @@
                             {
                                 label: "Close Me",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             }
                         ]
@@ -212,14 +212,14 @@
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             },
                             {
                                 label: "Create alert",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                action: function (button, buttonData, originalEvent) {
                                     BootstrapModalWrapperFactory.alert("Alert Modal Created");
                                 }
                             }
@@ -236,16 +236,16 @@
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             },
                             {
                                 label: "Update Title & Message",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.updateTitle("New Title");
-                                    modalWrapper.updateMessage("Updated message content");
+                                action: function (button, buttonData, originalEvent) {
+                                    this.updateTitle("New Title");
+                                    this.updateMessage("Updated message content");
                                 }
                             }
                         ]
@@ -261,40 +261,40 @@
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             },
                             {
                                 label: "Make Me Extra Large",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                                    modalWrapper.updateSize("modal-xl");
+                                action: function (button, buttonData, originalEvent) {
+                                    this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    this.updateSize("modal-xl");
                                 }
                             },
                             {
                                 label: "Make Me Large",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                                    modalWrapper.updateSize("modal-lg");
+                                action: function (button, buttonData, originalEvent) {
+                                    this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    this.updateSize("modal-lg");
                                 }
                             },
                             {
                                 label: "Make Me Small",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                                    modalWrapper.updateSize("modal-sm");
+                                action: function (button, buttonData, originalEvent) {
+                                    this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    this.updateSize("modal-sm");
                                 }
                             },
                             {
                                 label: "Make Me Default",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                                    modalWrapper.updateSize(null);
+                                action: function (button, buttonData, originalEvent) {
+                                    this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    this.updateSize(null);
                                 }
                             }
                         ]
@@ -311,19 +311,19 @@
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             },
                             {
                                 label: "Add Button",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.addButton({
+                                action: function (button, buttonData, originalEvent) {
+                                    this.addButton({
                                         id: "id-" + (++buttonsCount),
                                         label: "New " + buttonsCount,
                                         cssClass: "btn btn-secondary",
-                                        action: function (modalWrapper, button, buttonData, originalEvent) {
+                                        action: function (button, buttonData, originalEvent) {
                                             BootstrapModalWrapperFactory.showMessage("nothing only to show attached event to button id [" + buttonData.id + "]");
                                             return true;
                                         }
@@ -333,8 +333,8 @@
                             {
                                 label: "Delete Button",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.removeButton("id-" + (buttonsCount--));
+                                action: function (button, buttonData, originalEvent) {
+                                    this.removeButton("id-" + (buttonsCount--));
                                 }
                             }
                         ]
@@ -355,8 +355,8 @@
                         m.addButton({
                             label: "Close",
                             cssClass: "btn btn-secondary",
-                            action: function (modalWrapper, button, buttonData, originalEvent) {
-                                return modalWrapper.hide();
+                            action: function (button, buttonData, originalEvent) {
+                                return this.hide();
                             }
                         });
                     }, 2000);
@@ -524,22 +524,22 @@
                             {
                                 label: "Set Scrollable True",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.updateModalDialogScrollable(true);
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(true);
                                 }
                             },
                             {
                                 label: "Set Scrollable False",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.updateModalDialogScrollable(false);
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(false);
                                 }
                             },
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             }
                         ]
@@ -559,8 +559,8 @@
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             }
                         ]
@@ -585,21 +585,21 @@
                             {
                                 label: "Set Scrollable True",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.updateModalDialogScrollable(true);
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(true);
                                 }
                             },
                             {
                                 label: "Set Scrollable False",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.updateModalDialogScrollable(false);
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(false);
                                 }
                             },
                             {
                                 label: "Add More Content",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                action: function (button, buttonData, originalEvent) {
                                     var currentBody = $(dialog.originalModal).find(".modal-body").html();
                                     for (var i = 0; i < 5; i++) {
                                         currentBody += lineOfText;
@@ -610,22 +610,22 @@
                             {
                                 label: "Add Fullscreen",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                action: function (button, buttonData, originalEvent) {
                                     $(dialog.originalModal).addClass("bootstrap-modal-wrapper-fullscreen");
                                 }
                             },
                             {
                                 label: "Remove Fullscreen",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                action: function (button, buttonData, originalEvent) {
                                     $(dialog.originalModal).removeClass("bootstrap-modal-wrapper-fullscreen");
                                 }
                             },
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             }
                         ]
@@ -651,23 +651,23 @@
                                 template: "<a href='javascript:void(0)'></a>",
                                 label: "Set Scrollable True",
                                 cssClass: "btn btn-link",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.updateModalDialogScrollable(true);
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(true);
                                 }
                             },
                             {
                                 template: "<a href='javascript:void(0)'></a>",
                                 label: "Set Scrollable False",
                                 cssClass: "btn btn-link",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.updateModalDialogScrollable(false);
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(false);
                                 }
                             },
                             {
                                 template: "<a href='javascript:void(0)'></a>",
                                 label: "Add More Content",
                                 cssClass: "btn btn-link",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                action: function (button, buttonData, originalEvent) {
                                     var currentBody = $(dialog.originalModal).find(".modal-body").html();
                                     for (var i = 0; i < 5; i++) {
                                         currentBody += lineOfText;
@@ -679,7 +679,7 @@
                                 template: "<a href='javascript:void(0)'></a>",
                                 label: "Add Fullscreen",
                                 cssClass: "btn btn-link",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                action: function (button, buttonData, originalEvent) {
                                     $(dialog.originalModal).addClass("bootstrap-modal-wrapper-fullscreen");
                                 }
                             },
@@ -687,7 +687,7 @@
                                 template: "<a href='javascript:void(0)'></a>",
                                 label: "Remove Fullscreen",
                                 cssClass: "btn btn-link",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                action: function (button, buttonData, originalEvent) {
                                     $(dialog.originalModal).removeClass("bootstrap-modal-wrapper-fullscreen");
                                 }
                             },
@@ -695,8 +695,8 @@
                                 template: "<a href='javascript:void(0)'></a>",
                                 label: "Close",
                                 cssClass: "btn btn-link text-danger bg-light",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             }
                         ]

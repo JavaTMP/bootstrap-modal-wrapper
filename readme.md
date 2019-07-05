@@ -109,8 +109,8 @@ var modalWrapper = BootstrapModalWrapperFactory.createModal({
         {
             label: "Close Me",
             cssClass: "btn btn-primary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                return modalWrapper.hide();
+            action: function (button, buttonData, originalEvent) {
+                return this.hide();
             }
         }
     ]
@@ -128,14 +128,14 @@ var modalWrapper = BootstrapModalWrapperFactory.createModal({
         {
             label: "Close",
             cssClass: "btn btn-secondary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                return modalWrapper.hide();
+            action: function (button, buttonData, originalEvent) {
+                return this.hide();
             }
         },
         {
             label: "Create alert",
             cssClass: "btn btn-primary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
+            action: function (button, buttonData, originalEvent) {
                 BootstrapModalWrapperFactory.alert("Alert Modal Created");
             }
         }
@@ -153,16 +153,16 @@ BootstrapModalWrapperFactory.createModal({
         {
             label: "Close",
             cssClass: "btn btn-secondary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                return modalWrapper.hide();
+            action: function (button, buttonData, originalEvent) {
+                return this.hide();
             }
         },
         {
             label: "Update Title & Message",
             cssClass: "btn btn-primary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                modalWrapper.updateTitle("New Title");
-                modalWrapper.updateMessage("Updated message content");
+            action: function (button, buttonData, originalEvent) {
+                this.updateTitle("New Title");
+                this.updateMessage("Updated message content");
             }
         }
     ]
@@ -179,32 +179,32 @@ BootstrapModalWrapperFactory.createModal({
         {
             label: "Close",
             cssClass: "btn btn-secondary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                return modalWrapper.hide();
+            action: function (button, buttonData, originalEvent) {
+                return this.hide();
             }
         },
         {
             label: "Make Me Large",
             cssClass: "btn btn-primary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                modalWrapper.updateSize("modal-lg");
+            action: function (button, buttonData, originalEvent) {
+                this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                this.updateSize("modal-lg");
             }
         },
         {
             label: "Make Me Small",
             cssClass: "btn btn-primary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                modalWrapper.updateSize("modal-sm");
+            action: function (button, buttonData, originalEvent) {
+                this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                this.updateSize("modal-sm");
             }
         },
         {
             label: "Make Me Default",
             cssClass: "btn btn-primary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                modalWrapper.updateSize(null);
+            action: function (button, buttonData, originalEvent) {
+                this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                this.updateSize(null);
             }
         }
     ]
@@ -222,19 +222,19 @@ BootstrapModalWrapperFactory.createModal({
         {
             label: "Close",
             cssClass: "btn btn-secondary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                return modalWrapper.hide();
+            action: function (button, buttonData, originalEvent) {
+                return this.hide();
             }
         },
         {
             label: "Add Button",
             cssClass: "btn btn-primary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                modalWrapper.addButton({
+            action: function (button, buttonData, originalEvent) {
+                this.addButton({
                     id: "id-" + (++buttonsCount),
                     label: "New " + buttonsCount,
                     cssClass: "btn btn-secondary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         BootstrapModalWrapperFactory.showMessage("nothing only to show attached event to button id [" + buttonData.id + "]");
                         return true;
                     }
@@ -244,8 +244,8 @@ BootstrapModalWrapperFactory.createModal({
         {
             label: "Delete Button",
             cssClass: "btn btn-primary",
-            action: function (modalWrapper, button, buttonData, originalEvent) {
-                modalWrapper.removeButton("id-" + (buttonsCount--));
+            action: function (button, buttonData, originalEvent) {
+                this.removeButton("id-" + (buttonsCount--));
             }
         }
     ]
@@ -267,8 +267,8 @@ setTimeout(function () {
     m.addButton({
         label: "Close",
         cssClass: "btn btn-secondary",
-        action: function (modalWrapper, button, buttonData, originalEvent) {
-            return modalWrapper.hide();
+        action: function (button, buttonData, originalEvent) {
+            return this.hide();
         }
     }, true);
 }, 3000);
@@ -305,42 +305,42 @@ And the following are the response HTML code from the above URL:
                 modal.addButton({
                     label: "Update closable by backdrop click",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        modalWrapper.updateClosableByBackdrop(true);
+                    action: function (button, buttonData, originalEvent) {
+                        this.updateClosableByBackdrop(true);
                     }
                 });
                 modal.addButton({
                     label: "Show Ajax Parameters",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         alert("modal.options.url [" + modal.options.url + "]");
                     }
                 });
                 modal.addButton({
                     label: "Show localData Object",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         alert("You can Use the following data came from initiator sender code : " + JSON.stringify(modal.options.localData));
                     }
                 });
                 modal.addButton({
                     label: "Run Function from Sender",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         modal.options.localData.funRef();
                     }
                 });
                 modal.addButton({
                     label: "Close",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        return modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
                     }
                 });
                 modal.addButton({
                     label: "Show Alert Dialog",
                     cssClass: "btn btn-success",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         BootstrapModalWrapperFactory.alert("Alert Modal Created From within Ajax Content");
                     }
                 });

@@ -355,7 +355,7 @@
             var button = event.data.button;
             var buttonData = event.data.buttonData;
             if (buttonData.action && (typeof buttonData.action === "function")) {
-                return buttonData.action.call(button, modalWrapper, button, buttonData, event);
+                return buttonData.action.call(modalWrapper, button, buttonData, event);
             }
         });
         if (updateOptions !== false) {
@@ -408,8 +408,8 @@
                 {
                     label: "OK",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        this.hide();
                     }
                 }
             ]
@@ -433,8 +433,8 @@
                 {
                     label: "No",
                     cssClass: "btn btn-secondary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        this.hide();
                         if (options.onConfirmCancel && (typeof options.onConfirmCancel === "function")) {
                             options.onConfirmCancel();
                         }
@@ -443,8 +443,8 @@
                 {
                     label: "Yes",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        this.hide();
                         if (options.onConfirmAccept && (typeof options.onConfirmAccept === "function")) {
                             options.onConfirmAccept();
                         }
