@@ -48,6 +48,10 @@
                     <button id="fullscreenfeatures" type="button" class="btn btn-primary">
                         Fullscreen modal
                     </button>
+                    <button id="customTemplateForButtons" type="button" class="btn btn-primary">
+                        A link for buttons
+                    </button>
+
                     <h2 class="mt-3 text-primary">Update Contents on the fly</h2>
                     <button id="updateTitleContent" type="button" class="btn btn-primary">
                         Update Title and Content
@@ -446,7 +450,7 @@
                         closeByBackdrop: false,
                         sendId: true, // default is true which send the modal id as a url parameter.
                         idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
-                        updateSizeAfterDataFetchTo: "modal-sm", // default is  or null for standard or "modal-sm"
+                        updateSizeAfterDataFetchTo: "modal-xl", // default is  or null for standard or "modal-sm"
                         size: "modal-xl",
                         url: "blank-ajax-response.html",
                         localData: {
@@ -566,6 +570,20 @@
                         modalDialogScrollable: false,
                         buttons: [
                             {
+                                label: "Set Scrollable True",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.updateModalDialogScrollable(true);
+                                }
+                            },
+                            {
+                                label: "Set Scrollable False",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.updateModalDialogScrollable(false);
+                                }
+                            },
+                            {
                                 label: "Add More Content",
                                 cssClass: "btn btn-secondary",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
@@ -600,6 +618,76 @@
                         ]
                     });
                     $(dialog.originalModal).addClass("bootstrap-modal-wrapper-fullscreen");
+                    dialog.show();
+                });
+                $("#customTemplateForButtons").on("click", function (event) {
+                    var lineOfText = "<p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>";
+                    var longContent = "";
+                    for (var i = 0; i < 2; i++) {
+                        longContent += lineOfText;
+                    }
+                    var dialog = BootstrapModalWrapperFactory.createModal({
+                        title: "Fullscreen Long Body Content",
+                        message: longContent,
+                        closable: false,
+                        closeByBackdrop: true,
+                        centered: true,
+                        modalDialogScrollable: false,
+                        buttons: [
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Set Scrollable True",
+                                cssClass: "btn btn-link",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.updateModalDialogScrollable(true);
+                                }
+                            },
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Set Scrollable False",
+                                cssClass: "btn btn-link",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.updateModalDialogScrollable(false);
+                                }
+                            },
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Add More Content",
+                                cssClass: "btn btn-link",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    var currentBody = $(dialog.originalModal).find(".modal-body").html();
+                                    for (var i = 0; i < 5; i++) {
+                                        currentBody += lineOfText;
+                                    }
+                                    $(dialog.originalModal).find(".modal-body").html(currentBody);
+                                }
+                            },
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Add Fullscreen",
+                                cssClass: "btn btn-link",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    $(dialog.originalModal).addClass("bootstrap-modal-wrapper-fullscreen");
+                                }
+                            },
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Remove Fullscreen",
+                                cssClass: "btn btn-link",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    $(dialog.originalModal).removeClass("bootstrap-modal-wrapper-fullscreen");
+                                }
+                            },
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Close",
+                                cssClass: "btn btn-link text-danger bg-light",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            }
+                        ]
+                    });
                     dialog.show();
                 });
             });

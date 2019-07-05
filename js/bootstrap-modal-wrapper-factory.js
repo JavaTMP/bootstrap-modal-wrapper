@@ -90,8 +90,6 @@
             "<span aria-hidden='true'>&times;</span>" +
             "</button>";
     var modalBodyContainer = "<div class='modal-body'></div>";
-    var modalFooterContainer = "<div class='modal-footer d-flex flex-wrap'></div>";
-    var modalButtonContainer = "<button id='' type='button' class='my-1'></button>";
 
     function uuid() {
         var uuid = "", i, random;
@@ -123,7 +121,9 @@
             localData: {},
             centered: false,
             modalDialogScrollable: true,
-            modalTitleContainer: "<h5 class='modal-title'></h5>"
+            modalTitleContainer: "<h5 class='modal-title'></h5>",
+            modalButtonContainer: "<button id='' type='button' class='my-1'></button>",
+            modalFooterContainer: "<div class='modal-footer d-flex flex-wrap'></div>"
         }, options);
 
         $.extend(true, this.options.localData, options.localData);
@@ -168,7 +168,7 @@
             this.originalModal.find(".modal-body").html('').append(this.options.message);
         }
         if (this.options.buttons && this.options.buttons.length > 0) {
-            this.originalModal.find(".modal-content").append(modalFooterContainer);
+            this.originalModal.find(".modal-content").append(this.options.modalFooterContainer);
             for (var i = 0; i < this.options.buttons.length; i++) {
                 var buttonData = this.options.buttons[i];
                 this.addButton(buttonData, false);
@@ -358,11 +358,12 @@
         var modalWrapperInstance = this;
         var footerElement = this.originalModal.find(".modal-footer");
         if (footerElement.length === 0) {
-            this.originalModal.find(".modal-content").append(modalFooterContainer);
+            this.originalModal.find(".modal-content").append(this.options.modalFooterContainer);
             footerElement = this.originalModal.find(".modal-footer");
         }
         buttonData.id = buttonData.id ? buttonData.id : getUniqueID("modal-button");
-        var button = $(modalButtonContainer);
+        var buttonHtml = buttonData.template ? buttonData.template : modalWrapperInstance.options.modalButtonContainer;
+        var button = $(buttonHtml);
         button.attr("id", buttonData.id);
         button.addClass(buttonData.cssClass ? buttonData.cssClass : "");
         button.append(buttonData.label);
