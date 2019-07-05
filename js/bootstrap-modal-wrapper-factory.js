@@ -17,7 +17,9 @@
 }(this, function ($) {
     "use strict";
 
-    var defaults = {};
+    var defaults = {
+        starterZIndex: 1000
+    };
 
 // The actual plugin constructor
     function ModalWrapperFactory(options) {
@@ -175,28 +177,14 @@
         this.originalModal.on("show.bs.modal", function (event) {
             // YOU SHOULD STOP PROPAGATION because we register too for global modals.
             event.stopPropagation();
-            var currentOpenDialog = 0;
-
-//            for (var i = 0; i < $this.factory.globalModals.length; i++) {
-//                if ($this.factory.globalModals[i].isOpen && $this.factory.globalModals[i].originalModal.hasClass("show")) {
-//                    currentOpenDialog++;
-//                }
-//            }
-
-            currentOpenDialog = $(".modal.show").length;
-//            alert(currentOpenDialog);
-            var zIndex = 100000 + (10 * currentOpenDialog);
+            var zIndex = $this.factory.defaults.starterZIndex + (10 * $(".modal.show").length);
             $(this).css("z-index", zIndex);
             setTimeout(function () {
                 $(".modal-backdrop").not(".modal-stack").first().css("z-index", zIndex - 1).addClass("modal-stack");
             }, 0);
         }).on("shown.bs.modal", function (event) {
-            // YOU SHOULD STOP PROPAGATION because we register too for global modals.
-            event.stopPropagation();
             $this.isOpen = true;
         }).on("hide.bs.modal", function (event) {
-            // YOU SHOULD STOP PROPAGATION because we register too for global modals.
-            event.stopPropagation();
             if ($this.options.onDestroy && (typeof $this.options.onDestroy === "function")) {
                 if (!$this.options.onDestroy.call($this, $this)) {
                     event.preventDefault();
@@ -472,23 +460,21 @@
         // some bootstrap plugins like summernote have problem when run inside a bootstrap modals
         // as native bootstrap modal does support nested modal so we should handle the z-index of those plugins' modals
         // too in the same way we handle the modal wrapper instaces
-
+        var $this = this;
         $(document).on("show.bs.modal", '.modal', function (event) {
-            var zIndex = 100000 + (10 * $(".modal.show").length);
+            var zIndex = $this.options.starterZIndex + (10 * $(".modal.show").length);
             $(this).css("z-index", zIndex);
             setTimeout(function () {
                 $(".modal-backdrop").not(".modal-stack").first().css("z-index", zIndex - 1).addClass("modal-stack");
             }, 0);
         }).on("hidden.bs.modal", '.modal', function (event) {
             $(".modal.show").length && $("body").addClass("modal-open");
-        });
-        $(document).on('inserted.bs.tooltip', function (event) {
-            var zIndex = 100000 + (10 * $(".modal.show").length);
+        }).on('inserted.bs.tooltip', function (event) {
+            var zIndex = $this.options.starterZIndex + (10 * $(".modal.show").length);
             var tooltipId = $(event.target).attr("aria-describedby");
             $("#" + tooltipId).css("z-index", zIndex);
-        });
-        $(document).on('inserted.bs.popover', function (event) {
-            var zIndex = 100000 + (10 * $(".modal.show").length);
+        }).on('inserted.bs.popover', function (event) {
+            var zIndex = $this.options.starterZIndex + (10 * $(".modal.show").length);
             var popoverId = $(event.target).attr("aria-describedby");
             $("#" + popoverId).css("z-index", zIndex);
         });
