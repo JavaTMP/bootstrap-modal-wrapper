@@ -36,33 +36,16 @@
 
     ModalWrapperFactory.prototype.createAjaxModal = function (options) {
         var $this = this;
-        var ajaxModalContainer = $this.createModal(options);
-        var settings = $.extend(true, ajaxModalContainer.options, {
-            url: null,
-            dataType: "html",
-            httpMethod: "GET",
-            passData: {},
+        var settings = $.extend(true, {}, {
             sendId: true,
             idParameter: "ajaxModalId",
             updateSizeAfterDataFetchTo: "modal-lg",
-            ajaxContainerReadyEventName: "ajax-container-ready"
-        }, options);
-        if (settings.sendId) {
-            settings.passData[settings.idParameter] = ajaxModalContainer.options.id;
-        }
-
-        ajaxModalContainer.originalModal.removeClass("fade");
-        ajaxModalContainer.originalModal.find(".modal-dialog").css({transition: 'all .3s'});
-//        ajaxModalContainer.originalModal.find(".modal-body").css({"max-height": "65vh", "overflow-y": "auto", "overflow-x": "hidden"});
-//        ajaxModalContainer.originalModal.css({"overflow": "hidden"});
-
-        // make sure the dialog is shown before calling AJAX request
-        ajaxModalContainer.originalModal.one('shown.bs.modal', function (e) {
-            $.ajax({
-                type: settings.httpMethod,
-                dataType: settings.dataType,
-                url: settings.url,
-                data: settings.passData,
+            ajaxContainerReadyEventName: "ajax-container-ready",
+            ajax: {
+                type: "GET",
+                dataType: "html",
+                url: null,
+                data: {},
                 success: function (response, textStatus, jqXHR) {
                     ajaxModalContainer.updateSize(settings.updateSizeAfterDataFetchTo);
                     ajaxModalContainer.updateMessage(response);
@@ -70,7 +53,18 @@
                         $("#" + ajaxModalContainer.options.id).trigger(settings.ajaxContainerReadyEventName, [ajaxModalContainer]);
                     }, 0);
                 }
-            });
+            }
+        }, options);
+        var ajaxModalContainer = $this.createModal(settings);
+        if (settings.sendId) {
+            settings.ajax.data[settings.idParameter] = ajaxModalContainer.options.id;
+        }
+
+        ajaxModalContainer.originalModal.removeClass("fade");
+        ajaxModalContainer.originalModal.find(".modal-dialog").css({transition: 'all .3s'});
+        // make sure the dialog is shown before calling AJAX request
+        ajaxModalContainer.originalModal.one('shown.bs.modal', function (e) {
+            $.ajax(settings.ajax);
         });
         ajaxModalContainer.show();
 
@@ -107,7 +101,7 @@
     };
     function ModalWrapper(factory, options) {
         this.factory = factory;
-        this.options = $.extend({}, {
+        this.options = $.extend(true, {}, {
             id: getUniqueID("b-m-w"),
             title: null,
             message: null,
@@ -126,7 +120,7 @@
             modalFooterContainer: "<div class='modal-footer d-flex flex-wrap'></div>"
         }, options);
 
-        $.extend(true, this.options.localData, options.localData);
+//        $.extend(true, this.options.localData, options.localData);
 
         this.originalModal = null;
         this.isDestroy = false;
