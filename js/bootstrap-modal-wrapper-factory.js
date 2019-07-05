@@ -18,7 +18,7 @@
     "use strict";
 
     var defaults = {
-        starterZIndex: 1000
+        starterZIndex: 10000
     };
 
 // The actual plugin constructor
