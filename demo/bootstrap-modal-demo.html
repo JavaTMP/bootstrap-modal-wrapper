@@ -45,6 +45,9 @@
                     <button id="h1ForTitle" type="button" class="btn btn-primary">
                         H1 for title
                     </button>
+                    <button id="fullscreenfeatures" type="button" class="btn btn-primary">
+                        Fullscreen modal
+                    </button>
                     <h2 class="mt-3 text-primary">Update Contents on the fly</h2>
                     <button id="updateTitleContent" type="button" class="btn btn-primary">
                         Update Title and Content
@@ -94,7 +97,39 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="../dist/bootstrap-modal-wrapper-factory.min.js" type="text/javascript"></script>
         <style type="text/css">
-
+            .bootstrap-modal-wrapper-fullscreen {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                overflow: hidden;
+            }
+            .bootstrap-modal-wrapper-fullscreen .modal-dialog {
+                position: fixed;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                padding: 0;top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                max-height: 100%;
+                max-width: 100%;
+                display: flex;
+            }
+            .bootstrap-modal-wrapper-fullscreen .modal-dialog .modal-content {
+                height: 100vh;
+                max-height: 100vh;
+                overflow: hidden;
+            }
+            .bootstrap-modal-wrapper-fullscreen .modal-dialog .modal-content .modal-header,
+            .bootstrap-modal-wrapper-fullscreen .modal-dialog .modal-content .modal-footer {
+                flex-shrink: 0;
+            }
+            .bootstrap-modal-wrapper-fullscreen .modal-dialog .modal-content .modal-body {
+                overflow-y: auto;
+            }
         </style>
         <script type="text/javascript">
             jQuery(function ($) {
@@ -513,6 +548,58 @@
                             }
                         ]
                     });
+                    dialog.show();
+                });
+
+                $("#fullscreenfeatures").on("click", function (event) {
+                    var lineOfText = "<p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>";
+                    var longContent = "";
+                    for (var i = 0; i < 2; i++) {
+                        longContent += lineOfText;
+                    }
+                    var dialog = BootstrapModalWrapperFactory.createModal({
+                        title: "Fullscreen Long Body Content",
+                        message: longContent,
+                        closable: false,
+                        closeByBackdrop: true,
+                        centered: true,
+                        modalDialogScrollable: false,
+                        buttons: [
+                            {
+                                label: "Add More Content",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    var currentBody = $(dialog.originalModal).find(".modal-body").html();
+                                    for (var i = 0; i < 5; i++) {
+                                        currentBody += lineOfText;
+                                    }
+                                    $(dialog.originalModal).find(".modal-body").html(currentBody);
+                                }
+                            },
+                            {
+                                label: "Add Fullscreen",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    $(dialog.originalModal).addClass("bootstrap-modal-wrapper-fullscreen");
+                                }
+                            },
+                            {
+                                label: "Remove Fullscreen",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    $(dialog.originalModal).removeClass("bootstrap-modal-wrapper-fullscreen");
+                                }
+                            },
+                            {
+                                label: "Close",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            }
+                        ]
+                    });
+                    $(dialog.originalModal).addClass("bootstrap-modal-wrapper-fullscreen");
                     dialog.show();
                 });
             });
