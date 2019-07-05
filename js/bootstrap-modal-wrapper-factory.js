@@ -56,15 +56,15 @@
             }
         }, options);
         var ajaxModalContainer = $this.createModal(settings);
-        if (settings.sendId) {
-            settings.ajax.data[settings.idParameter] = ajaxModalContainer.options.id;
+        if (ajaxModalContainer.options.sendId) {
+            ajaxModalContainer.options.ajax.data[ajaxModalContainer.options.idParameter] = ajaxModalContainer.options.id;
         }
 
         ajaxModalContainer.originalModal.removeClass("fade");
         ajaxModalContainer.originalModal.find(".modal-dialog").css({transition: 'all .3s'});
         // make sure the dialog is shown before calling AJAX request
         ajaxModalContainer.originalModal.one('shown.bs.modal', function (e) {
-            $.ajax(settings.ajax);
+            $.ajax(ajaxModalContainer.options.ajax);
         });
         ajaxModalContainer.show();
 
