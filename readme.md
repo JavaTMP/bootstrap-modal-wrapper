@@ -287,7 +287,7 @@ BootstrapModalWrapperFactory.createAjaxModal({
         url: "",
         data: {}
     },
-    ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+    ajaxContainerReadyEventName: "event-name-triggered-once-ajax-content-updated"
 });
 ```
 
