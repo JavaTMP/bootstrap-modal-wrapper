@@ -284,7 +284,7 @@ BootstrapModalWrapperFactory.createAjaxModal({
     closeByBackdrop: false,
     localData: {},
     ajax: { // all jquery.ajax parameters are supported.
-        url: javatmp.settings.contextPath + "/pages/content/CreateNewContent",
+        url: "",
         data: {}
     },
     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
