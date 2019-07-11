@@ -238,7 +238,7 @@ BootstrapModalWrapperFactory.createModal({
                         BootstrapModalWrapperFactory.showMessage("nothing only to show attached event to button id [" + buttonData.id + "]");
                         return true;
                     }
-                }, true);
+                });
             }
         },
         {
@@ -270,19 +270,24 @@ setTimeout(function () {
         action: function (button, buttonData, originalEvent) {
             return this.hide();
         }
-    }, true);
+    });
 }, 3000);
 ```
 #### Advanced AJAX Bootstrap Modal Wrapper Contents
-You can simply adapt and use the bootstrap modal wrapper to provide a dynamic Bootstrap modal with remote AJAX contents using `createAjaxModal` method,
-For example:
+You can simply adapt and use the bootstrap modal wrapper to provide a dynamic Bootstrap modal with remote AJAX contents
+using `createAjaxModal` method, For example:
 ```JS
 BootstrapModalWrapperFactory.createAjaxModal({
     message: '<div class="text-center">Loading</div>',
     closable: true,
     title: "AJAX Content",
     closeByBackdrop: false,
-    url: "blank-ajax-response.html"
+    localData: {},
+    ajax: { // all jquery.ajax parameters are supported.
+        url: javatmp.settings.contextPath + "/pages/content/CreateNewContent",
+        data: {}
+    },
+    ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
 });
 ```
 
@@ -351,4 +356,5 @@ And the following are the response HTML code from the above URL:
 ```
 
 ## Copyright and License
-Bootstrap-modal-wrapper is copyrighted by [JavaTMP](http://www.javatmp.com) and licensed under [MIT license](https://github.com/JavaTMP/bootstrap-modal-wrapper/blob/master/LICENSE).
+Bootstrap-modal-wrapper is copyrighted by [JavaTMP](http://www.javatmp.com) and
+licensed under [MIT license](https://github.com/JavaTMP/bootstrap-modal-wrapper/blob/master/LICENSE).
