@@ -17,8 +17,7 @@ gulp
 ```
 ## Demo And Examples
 Online demo of all below examples can be found in the following JavaTMP demo pages:
-- [Bootstrap Modal Online Demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/index.html#pages/plugins/bootstrap-modal-wrapper.html).
-- [Bootstrap Modal RTL Online Demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/index-rtl.html#pages/plugins/bootstrap-modal-wrapper.html).
+- [Bootstrap Modal Online Demo](http://java.javatmp.com/#/pages/static/plugins/bootstrap-modal-wrapper).
 
 ### BOOTSTRAP MESSAGE MODAL
 The simplest scenario of modal wrapper is to show a simple message when use press a button:
