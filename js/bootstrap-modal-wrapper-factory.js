@@ -336,6 +336,14 @@
         }
         return this;
     };
+    ModalWrapper.prototype.disableButtons = function () {
+        var footerElement = this.originalModal.find(".modal-footer");
+        footerElement.find('button').prop('disabled', true);
+    };
+    ModalWrapper.prototype.enableButtons = function () {
+        var footerElement = this.originalModal.find(".modal-footer");
+        footerElement.find('button').prop('disabled', false);
+    };
     ModalWrapper.prototype.addButton = function (buttonData, updateOptions) {
         var modalWrapperInstance = this;
         var footerElement = this.originalModal.find(".modal-footer");
